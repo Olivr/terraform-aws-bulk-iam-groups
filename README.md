@@ -1,0 +1,71 @@
+# terraform-aws-bulk-iam-groups
+
+Create many AWS IAM groups at once.
+
+## Examples
+
+Each property of the `groups` object is the name of the group and its value is a `group` object
+
+The `group` object can take the following properties:
+
+| Name         | Description                                  | Type           | Required |
+| ------------ | -------------------------------------------- | -------------- | :------: |
+| policies     | List of policies to attach                   | `list(string)` |    no    |
+| assume_roles | List of roles users of this group can assume | `list(string)` |    no    |
+
+### Complete example
+
+```hcl
+module "iam_groups" {
+  source = "github.com/olivr-com/terraform-aws-bulk-iam-groups"
+
+  groups = {
+    SuperAdministrators = {
+      policies = ["arn:aws:iam::aws:policy/AdministratorAccess"]
+      assume_roles = [
+        "arn:aws:iam::111111111111:role/AdministratorRole",
+        "arn:aws:iam::222222222222:role/AdministratorRole"
+      ]
+    }
+
+    Administrators = {
+      policies = ["arn:aws:iam::aws:policy/AdministratorAccess"]
+    }
+
+    SomeOtherGroup = {}
+}
+
+output "iam_groups" {
+  value = module.iam_groups.groups
+}
+```
+
+## Requirements
+
+| Name      | Version    |
+| --------- | ---------- |
+| terraform | ~> 0.12.24 |
+| aws       | ~> 2.58    |
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| aws  | ~> 2.58 |
+
+## Inputs
+
+| Name   | Description      | Type                     | Default | Required |
+| ------ | ---------------- | ------------------------ | ------- | :------: |
+| groups | Groups to create | `map(map(list(string)))` | n/a     |   yes    |
+
+## Outputs
+
+| Name   | Description                                            |
+| ------ | ------------------------------------------------------ |
+| groups | Created groups in the format `{ name = { name, arn }}` |
+
+## Similar modules
+
+- [terraform-aws-bulk-iam-roles](https://github.com/olivr-com/terraform-aws-bulk-iam-roles)
+- [terraform-aws-bulk-iam-users](https://github.com/olivr-com/terraform-aws-bulk-iam-users)
