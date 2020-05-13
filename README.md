@@ -58,7 +58,7 @@ output "iam_groups" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| groups | Groups to create. See [\_var\_groups.example.json](\_var\_groups.example.json) | `map(map(list(string)))` | n/a | yes |
+| groups | Groups to create. See [\_var\_groups.example.tfvars.json](\_var\_groups.example.tfvars.json) | `map(map(list(string)))` | n/a | yes |
 
 ## Outputs
 
