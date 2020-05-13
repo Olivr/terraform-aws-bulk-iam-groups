@@ -41,6 +41,31 @@ output "iam_groups" {
 ```
 
 <!-- auto-terraform-docs -->
+## Requirements
+
+| Name | Version |
+|------|---------|
+| terraform | ~> 0.12.24 |
+| aws | ~> 2.58 |
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| aws | ~> 2.58 |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| groups | Groups to create. See [\_var\_groups.example.json](\_var\_groups.example.json) | `map(map(list(string)))` | n/a | yes |
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| groups | Created groups in the format `{ name = { name, arn }}` |
+
 <!-- auto-terraform-docs -->
 
 ## Similar modules
@@ -63,7 +88,6 @@ All contributions are welcome! Please see the [docs/CONTRIBUTING.md](docs/CONTRI
 
 <!-- auto-contribute -->
 <!-- auto-license -->
-
 ## License
 
 This project is licensed under the Apache 2.0 License - see the [LICENSE](LICENSE) file for details
